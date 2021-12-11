@@ -41,8 +41,9 @@
 			<p>
 				<c:out value="${ book.thought }" />
 			</p>
+			<a href="/books/edit/${ book.id }">Edit</a>
+
 		</c:if>
-		<a href="#">Edit</a>
 		<!-- ------------------------------------------------------------------------------------ -->
 		<!-- to test if the session user id matched the book's user is
 		if it does NOT match we use name to represent the user name -->
