@@ -45,7 +45,7 @@ public class User {
 	private String confirmPassword;
 
 	// ONE to MANY ------ ONE to MANY ------ ONE to MANY ------ ONE to MANY ------
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
 	private List<Book> books;
 
 	// date for createat and updated at ------- date for createat and updated at

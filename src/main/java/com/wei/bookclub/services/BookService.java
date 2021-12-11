@@ -13,7 +13,7 @@ import com.wei.bookclub.repositories.BookRepo;
 public class BookService {
 	@Autowired
 	private BookRepo bookRepo;
-	
+
 // CRUD
 	// READ ALL
 	public List<Book> displayBooks() {

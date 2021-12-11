@@ -42,7 +42,7 @@ public class Book {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User user;
+	private User user_id;
 
 	// date for createat and updated at ------- date for createat and updated at
 	@Column(updatable = false)
@@ -54,6 +54,62 @@ public class Book {
 
 	// constructor --------------- constructor --------------- constructor
 	public Book() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getThought() {
+		return thought;
+	}
+
+	public void setThought(String thought) {
+		this.thought = thought;
+	}
+
+	public User getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(User user_id) {
+		this.user_id = user_id;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	// follow by createdAt and updatedAt ---------------------------------

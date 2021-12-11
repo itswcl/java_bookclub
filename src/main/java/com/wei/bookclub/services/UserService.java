@@ -1,5 +1,6 @@
 package com.wei.bookclub.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -55,4 +56,20 @@ public class UserService {
             return user;
         }
     }
+    
+	// READ ONE
+	public User displayUser(Long user_id) {
+		Optional<User> optionalUser = userRepo.findById(user_id);
+		
+		if (optionalUser.isPresent()) {
+			return optionalUser.get();
+		} else {
+			return null;
+		}
+	}
+	
+	// READ MANYA
+	public List<User> displayUsers() {
+		return userRepo.findAll();
+	}
 }
