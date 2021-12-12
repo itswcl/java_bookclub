@@ -29,13 +29,15 @@
 			</h1>
 			<a href="/books">back to the shelves</a>
 		</div>
-		${book.id }
+		
 		<!-- EDIT CLASS FORM -->
 		<form:form action="/books/edit/${book.id}" method="post"
 			modelAttribute="book">
 			<input type="hidden" name="_method" value="put">
 			<form:input type="hidden" path="user_id"
 				value="${ book.user_id.getId() }" />
+			<form:input type="hidden" path="borrow_id"
+				value="${ book.getBorrow_id().getId() }" />
 			<form:errors path="*" />
 			<p>
 				<form:label path="title">Title</form:label>

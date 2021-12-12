@@ -52,32 +52,32 @@
 				<c:forEach var="book" items="${ books }">
 
 					<tr>
-					<c:if test="${ book.borrow_id == null }">
-						<td><c:out value="${ book.id }" /></td>
-						<td><a href="/books/${ book.id }"><c:out
-									value="${ book.title }" /></a></td>
-						<td><c:out value="${ book.author }" /></td>
-						<td><c:out value="${ book.user_id.getUserName() }" /></td>
+						<c:if test="${ book.borrow_id == null }">
+							<td><c:out value="${ book.id }" /></td>
+							<td><a href="/books/${ book.id }"><c:out
+										value="${ book.title }" /></a></td>
+							<td><c:out value="${ book.author }" /></td>
+							<td><c:out value="${ book.user_id.getUserName() }" /></td>
 
-						<c:if test="${  user_id == book.user_id.getId() }">
-							<td class="d-flex"><a class="btn btn-primary me-md-2"
-								href="/books/edit/${ book.id }">Edit</a> <!-- careful with adding route remeber to have / in front -->
-								<form:form action="/books/delete/${book.id}" method="post">
-									<input type="hidden" name="_method" value="delete">
-									<input class="btn btn-primary" type="submit" value="Delete" />
-								</form:form></td>
-						</c:if>
+							<c:if test="${  user_id == book.user_id.getId() }">
+								<td class="d-flex"><a class="btn btn-primary me-md-2"
+									href="/books/edit/${ book.id }">Edit</a> <!-- careful with adding route remeber to have / in front -->
+									<form:form action="/books/delete/${book.id}" method="post">
+										<input type="hidden" name="_method" value="delete">
+										<input class="btn btn-primary" type="submit" value="Delete" />
+									</form:form></td>
+							</c:if>
 
-						<c:if test="${  user_id != book.user_id.getId() }">
-							<td><form:form action="bookmarket/borrow/${ book.id }"
-									method="post" modelAttribute="book">
-									<input type="hidden" name="_method" value="put" />
-									<form:input type="hidden" path="borrow_id"
-										vale="${ user.getId() }" />
-									<input class="btn btn-primary" type="submit" value="Borrow" />
-								</form:form></td>
-						</c:if>
-						
+							<c:if test="${  user_id != book.user_id.getId() }">
+								<td><form:form action="bookmarket/borrow/${ book.id }"
+										method="post" modelAttribute="book">
+										<input type="hidden" name="_method" value="put" />
+										<form:input type="hidden" path="borrow_id"
+											vale="${ user.getId() }" />
+										<input class="btn btn-primary" type="submit" value="Borrow" />
+									</form:form></td>
+							</c:if>
+
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -102,7 +102,17 @@
 									value="${ borrowBook.title }" /></a></td>
 						<td><c:out value="${ borrowBook.author }" /></td>
 						<td><c:out value="${ borrowBook.user_id.getUserName() }" /></td>
-						<td><a class="btn btn-primary" href="#">return</a></td>
+						<td>
+						
+<!-- 						<a class="btn btn-primary" href="#">return</a> -->						
+						<form:form action="bookmarket/return/${ borrowBook.id }" method="post" modelAttribute="book">
+								<input type="hidden" name="_method" value="put" />
+								<form:input type="hidden" path="borrow_id" vale="null" />
+								<input class="btn btn-primary" type="submit" value="return" />
+						</form:form>
+							
+							
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -234,7 +234,7 @@ public class MainController {
 	
 	
 // ------------------------------------------------------------------------------------
-	
+	// --- bookmarket route for borrowing book using PUT request
 	@PutMapping("/bookmarket/borrow/{id}")
 	public String borrowBook(
 			@PathVariable("id") Long id,
@@ -250,7 +250,21 @@ public class MainController {
 		
 		return "redirect:/bookmarket";
 	}
-// ------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------
+	// --- bookmarket route for returning book using PUT request
+	@PutMapping("/bookmarket/return/{id}")
+	public String returnBook(
+			@PathVariable("id") Long id,
+			@Valid @ModelAttribute("book") Book book,
+			BindingResult result) {
+
+		Book book1 = bookService.displayBook(id);
+		
+		book1.setBorrow_id(null);
+		bookService.createBook(book1);		
+		
+		return "redirect:/bookmarket";
+	}
 	
 }
