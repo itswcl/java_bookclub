@@ -48,6 +48,10 @@ public class User {
 	@OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
 	private List<Book> books;
 
+	// ONE to MANY ------ ONE to MANY ------ ONE to MANY ------ ONE to MANY ------
+	@OneToMany(mappedBy = "borrow_id", fetch = FetchType.LAZY)
+	private List<Book> borrowBooks;
+
 	// date for createat and updated at ------- date for createat and updated at
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -115,6 +119,14 @@ public class User {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public List<Book> getBorrowBooks() {
+		return borrowBooks;
+	}
+
+	public void setBorrowBooks(List<Book> borrowBooks) {
+		this.borrowBooks = borrowBooks;
 	}
 
 	// follow by createdAt and updatedAt ----------- follow by createdAt and

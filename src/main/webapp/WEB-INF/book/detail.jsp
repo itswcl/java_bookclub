@@ -41,7 +41,13 @@
 			<p>
 				<c:out value="${ book.thought }" />
 			</p>
-			<a href="/books/edit/${ book.id }">Edit</a>
+			<a class="btn" href="/books/edit/${ book.id }">Edit</a>
+			
+			<!-- careful with adding route remeber to have / in front -->
+			<form:form action="/books/delete/${book.id}" method="post">
+				<input type="hidden" name="_method" value="delete">
+				<input class="btn" type="submit" value="Delete" />
+			</form:form>
 
 		</c:if>
 		<!-- ------------------------------------------------------------------------------------ -->

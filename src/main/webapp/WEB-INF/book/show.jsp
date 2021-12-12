@@ -21,7 +21,10 @@
 	<div class="container">
 		<div class="row d-flex">
 			<div class="col">
-				<h1>Welcome, <c:out value="${ user.getUserName() }"/></h1>
+				<h1>
+					Welcome,
+					<c:out value="${ user.getUserName() }" />
+				</h1>
 				<p>Books from everyone's shelves:</p>
 			</div>
 			<div class="col">
@@ -30,6 +33,9 @@
 				</div>
 				<div>
 					<a href="/books/new">+ Add book to my shelf!</a>
+				</div>
+				<div>
+					<a href="/bookmarket">Book Market</a>
 				</div>
 			</div>
 		</div>
@@ -47,7 +53,8 @@
 				<c:forEach var="book" items="${ books }">
 					<tr>
 						<td><c:out value="${ book.id }" /></td>
-						<td><a href="/books/${ book.id }"><c:out value="${ book.title }" /></a></td>
+						<td><a href="/books/${ book.id }"><c:out
+									value="${ book.title }" /></a></td>
 						<td><c:out value="${ book.author }" /></td>
 						<c:if test=""></c:if>
 						<td><c:out value="${ book.user_id.getUserName() }" /></td>

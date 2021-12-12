@@ -43,6 +43,11 @@ public class Book {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user_id;
+	
+	// MANY to ONE --------- MANY to ONE --------- MANY to ONE --------- MANY to ONE
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "borrow_id")
+	private User borrow_id;
 
 	// date for createat and updated at ------- date for createat and updated at
 	@Column(updatable = false)
@@ -88,6 +93,14 @@ public class Book {
 		this.thought = thought;
 	}
 
+	public User getBorrow_id() {
+		return borrow_id;
+	}
+
+	public void setBorrow_id(User borrow_id) {
+		this.borrow_id = borrow_id;
+	}
+	
 	public User getUser_id() {
 		return user_id;
 	}

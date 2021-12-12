@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -169,7 +170,6 @@ public class MainController {
 		}
 
 	}
-
 	// PUT route // to use id as ALWAYS
 	@PutMapping("/books/edit/{id}") // PUT route // to use id as ALWAYS
 	public String bookEdit(@Valid @ModelAttribute("book") Book book, BindingResult result
@@ -177,20 +177,80 @@ public class MainController {
 		if (result.hasErrors()) {
 			return "book/edit.jsp";
 		} else {
-			System.out.println(book.getId());
-			System.out.println(book.getTitle());
 			// re use create Language to update same ID pass in
 			bookService.createBook(book);
 			return "redirect:/books";
 		}
 	}
 	
+	
 // ------------------------------------------------------------------------------------
+	// --- DELETE a book
+	@DeleteMapping("/books/delete/{id}")
+	public String bookDelete(
+			@PathVariable("id") Long id) {
+		
+			bookService.removeBook(id);
+			return "redirect:/books";
+		
+	}
+	
 
+// ------------------------------------------------------------------------------------
 	// --- LOG OUT
 	@GetMapping("/books/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+
+// ------------------------------------------------------------------------------------
+	// --- BookMarket Route to show books with actions borrow or edit and delete
+	@GetMapping("/bookmarket")
+	public String displayBooksInMarket(
+			HttpSession session,
+			Model model) {
+
+		Long user_id = (Long) session.getAttribute("user_id");
+		
+		if (user_id == null) {
+			return "redirect:/";
+			
+		} else {
+			User user = userService.displayUser(user_id);
+			model.addAttribute("user", user);
+			
+			List<Book> userBorrows = user.getBorrowBooks();
+			model.addAttribute("userBorrows", userBorrows);
+			
+			model.addAttribute("book", new Book());
+		}
+
+		List<Book> books = bookService.displayBooks();
+		model.addAttribute("books", books);
+		return "/bookmarket/show.jsp";
+	}
+	
+	
+// ------------------------------------------------------------------------------------
+	
+	@PutMapping("/bookmarket/borrow/{id}")
+	public String borrowBook(
+			@PathVariable("id") Long id,
+			@Valid @ModelAttribute("book") Book book,
+			BindingResult result,
+			HttpSession session) {
+
+		User userId = userService.displayUser((Long) session.getAttribute("user_id"));
+		Book book1 = bookService.displayBook(id);
+		
+		book1.setBorrow_id(userId);
+		bookService.createBook(book1);		
+		
+		return "redirect:/bookmarket";
+	}
+// ------------------------------------------------------------------------------------
+
+	
 }

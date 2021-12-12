@@ -35,10 +35,8 @@ public class BookService {
 	
 	// CREATE and UPDATE one
 	public Book createBook(Book book) {
-		System.out.println(book);
 		return bookRepo.save(book);
 	}
-	
 	
 	// DELETE ONE
 	public void removeBook(Long book_id) {
